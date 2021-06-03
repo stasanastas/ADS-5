@@ -8,15 +8,14 @@ class TPQueue {
   struct ITEM {
     T data;
     ITEM *next;
-    int prior;
   };
 
  public:
   TPQueue():head(nullptr), tail(nullptr) {}
-  ~TPQueue();
-  void push(const T&data);
-  T pop();
-  void print() const;
+  ~TPQueue() {
+    while (head)
+      pop();
+  }
 
  private:
   ITEM *head;
@@ -28,12 +27,8 @@ class TPQueue {
     return item;
   }
 
-  ~TPQueue() {
-    while(head)
-      pop();
-  }
   void push(const T&data) {
-    if(tail && head) {
+    if (tail && head) {
       ITEM *temp = head;
       if (temp->data.prior < data.prior) {
         temp = create(data);
@@ -53,7 +48,7 @@ class TPQueue {
       }
       if (!temp->next) {
         tail->next = create(data);
-        tail = tail−>next;
+        tail = tail->next;
       }
     } else {
       head = create(data);
@@ -62,8 +57,8 @@ class TPQueue {
   }
   T pop() {
     if (head) {
-      ITEM *temp = head−>next;
-      T data = head−>data;
+      ITEM *temp = head->next;
+      T data = head->data;
       delete head;
       head = temp;
       return data;
