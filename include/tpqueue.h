@@ -56,15 +56,11 @@ class TPQueue {
     }
   }
   T pop() {
-    if (head) {
-      ITEM *temp = head->next;
-      T data = head->data;
-      delete head;
-      head = temp;
-      return data;
-    } else {
-      return 0;
-    }
+    ITEM *temp = head->next;
+    T data = head->data;
+    delete head;
+    head = temp;
+    return data;
   }
 };
 
