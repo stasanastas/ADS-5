@@ -7,13 +7,13 @@ template<typename T>
 class TPQueue {
   struct ITEM {
     T data;
-    ITEM *next;
+    ITEM * next;
   };
 
-private:
+ private:
   ITEM *head;
   ITEM *tail;
-  ITEM* create(T data) {
+  ITEM *create(T data) {
     ITEM *item = new ITEM;
     item->data = data;
     item->next = nullptr;
@@ -32,12 +32,12 @@ private:
       ITEM *temp = head;
       if (temp->data.prior < data.prior) {
         temp = create(data);
-        temp->next = next;
+        temp->next = head;
         head = temp;
       } else {
         while (temp->next) {
           if (temp->next->data.prior < data.prior) {
-            ITEM *item = careate(data);
+            ITEM *item = create(data);
             item->next = temp->next;
             temp->next = item;
             break;
@@ -63,7 +63,7 @@ private:
       head = temp;
       return data;
     } else {
-      return (T)0;
+      return 0;
     }
   }
 };
